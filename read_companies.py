@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def read_companies():
-    df = pd.read_csv('C:/Users/Bhavya/Desktop/projects/companies.csv')
+    df = pd.read_csv('data_exploration/companies.csv')
     print("Column names: ", df.columns.to_list())
     print("First 5 rows of the DataFrame:")
     print(df.head())
@@ -28,6 +28,13 @@ def read_companies():
     df_top_industry = df.loc[df.groupby('Industry')['Revenue_USD_billions'].idxmax()]
     print(df_top_industry[['Industry', 'Name', 'Revenue_USD_billions']].sort_values(by='Revenue_USD_billions', ascending=False))
     
-    
+    return df
 
-read_companies()
+
+def write_companies():
+    df = read_companies()
+    df.to_csv('data_exploration/processed_companies.csv', index=False)
+    print("Processed DataFrame saved to 'processed_companies.csv'.")
+
+write_companies()
+print("Script execution completed.")
